@@ -1,4 +1,4 @@
-package com.umang.jobapp.Repository;
+package com.umang.jobapp.Job.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

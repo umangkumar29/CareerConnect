@@ -7,7 +7,7 @@ import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import com.umang.jobapp.Job.Entity.Job;
-import com.umang.jobapp.Repository.JobRepository;
+import com.umang.jobapp.Job.Repository.JobRepository;
 
 @Service
 public class JobServiceImpl implements JobService {
