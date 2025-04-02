@@ -1,6 +1,16 @@
 package com.umang.jobapp.Job.Entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+// @Table(name = "job_table")
 public class Job {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String minSalary;
     private String maxSalary;
@@ -43,6 +53,9 @@ public class Job {
 
     public String getJobType() {
         return jobType;
+    }
+
+    public Job() {
     }
 
     public void setJobType(String jobType) {

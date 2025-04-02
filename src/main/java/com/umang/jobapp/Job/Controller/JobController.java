@@ -1,9 +1,7 @@
 package com.umang.jobapp.Job.Controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,11 +14,15 @@ import com.umang.jobapp.Job.Service.JobService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
 @RestController
+/* Sets the base url as "/jobs" for all other Rest APIs in the controller */
+@RequestMapping("/jobs")
 public class JobController {
 
     
@@ -31,12 +33,12 @@ public class JobController {
         this.jobService = jobService;
     }
 
-    @GetMapping("/jobs")
+    @GetMapping
     public List<Job> getAllJobs() {
         return jobService.getAllJobs();
     }
 
-    @GetMapping("/jobs/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Job> getJobById(@PathVariable Long id){
         Job job = jobService.getJobById(id);
         if(job != null){
@@ -47,17 +49,28 @@ public class JobController {
     
 
 
-    @PostMapping("/jobs")
+    @PostMapping
     public String addJob(@RequestBody Job job){
         jobService.addJob(job);
         return "Job added successfully";
     }
 
-    @DeleteMapping("/jobs/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteJob(@PathVariable Long id){
         boolean deleted = jobService.deleteJob(id);
         if(deleted){
             return new ResponseEntity<>("Job deleted successfully", HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>("Job not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateJob(@PathVariable Long id, @RequestBody Job job) {
+        boolean updated = jobService.updateJob(id, job);
+        if(updated){
+            return new ResponseEntity<>("Job updated successfully", HttpStatus.OK);
         }
         else{
             return new ResponseEntity<>("Job not found", HttpStatus.NOT_FOUND);
