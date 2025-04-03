@@ -3,6 +3,7 @@ package com.umang.jobapp.Job.Service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +14,12 @@ import com.umang.jobapp.Job.Repository.JobRepository;
 public class JobServiceImpl implements JobService {
 
     // private List<Job> jobs = new ArrayList<>();
-
-    JobRepository jobRepository;
+    @Autowired
+    private JobRepository jobRepository;
 
     public JobServiceImpl(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
     }
-
 
     @Override
     public List<Job> getAllJobs() {

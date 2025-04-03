@@ -1,9 +1,13 @@
 package com.umang.jobapp.Job.Entity;
 
+import com.umang.jobapp.Company.Entity.Company;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 // @Table(name = "job_table")
@@ -18,6 +22,17 @@ public class Job {
     private String jobType;
     private String jobTitle;
     private String jobDescription;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public Long getId() {
         return Id;

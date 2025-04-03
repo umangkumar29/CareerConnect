@@ -19,12 +19,12 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<Company> getAllCompanies() {
-       return companyRepository.findAll();
+        return companyRepository.findAll();
     }
 
     @Override
     public Company getCompanyById(Long compId) {
-       return companyRepository.findById(compId).orElse(null);
+        return companyRepository.findById(compId).orElse(null);
     }
 
     @Override
@@ -44,20 +44,20 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public boolean updateCompany(Long compId, Company company) {
-       Optional<Company> companyOptional = companyRepository.findById(compId);
-         if (companyOptional.isPresent()) {
-              Company c = companyOptional.get();
-              c.setCompName(company.getCompName());
-              c.setCompDescription(company.getCompDescription());
-              c.setCompLocation(company.getCompDescription());
-              try {
+        Optional<Company> companyOptional = companyRepository.findById(compId);
+        if (companyOptional.isPresent()) {
+            Company c = companyOptional.get();
+            c.setCompName(company.getCompName());
+            c.setCompDescription(company.getCompDescription());
+            c.setCompLocation(company.getCompLocation());
+            try {
                 companyRepository.save(c);
                 return true;
-              } catch (Exception e) {
+            } catch (Exception e) {
                 return false;
-              }
-         }
-         return false;
+            }
+        }
+        return false;
     }
 
 }

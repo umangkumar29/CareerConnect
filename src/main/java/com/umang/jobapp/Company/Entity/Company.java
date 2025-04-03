@@ -1,5 +1,8 @@
 package com.umang.jobapp.Company.Entity;
+
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.umang.jobapp.Job.Entity.Job;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,16 +16,16 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long compId;
     private String compName;
-    private String compLocation; 
+    private String compLocation;
     private String compDescription;
-    
-    @OneToMany
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
     private List<Job> jobs;
 
     /* For JPA */
     public Company() {
     }
-
 
     public Long getCompId() {
         return compId;
@@ -64,5 +67,4 @@ public class Company {
         this.jobs = jobs;
     }
 
-    
 }
