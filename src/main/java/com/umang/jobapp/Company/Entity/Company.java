@@ -4,7 +4,10 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.umang.jobapp.Job.Entity.Job;
+import com.umang.jobapp.Review.Entity.Review;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,6 +21,21 @@ public class Company {
     private String compName;
     private String compLocation;
     private String compDescription;
+
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
+    private List<Review> review;
+
+    public Company(List<Review> review) {
+        this.review = review;
+    }
+
+    public List<Review> getReview() {
+        return review;
+    }
+
+    public void setReview(List<Review> review) {
+        this.review = review;
+    }
 
     @JsonIgnore
     @OneToMany(mappedBy = "company")
